@@ -4,11 +4,11 @@ Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
 Version:	0.54
-Release:	0.%{_snapver}.1
+Release:	1	
 License:	MIT-licensed
 Group:		X11/Applications/Networking
-Source0:	http://www.tartarus.org/~simon/putty-unix/%{name}-%{version}-%{snapshot}.tar.gz
-# Source0-md5:	6cc21b0ee5909a679433bec8b48fa37d
+Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
+# Source0-md5:	ea6de3bc40bb34f4a4a8c861c08e6f31
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
@@ -72,7 +72,7 @@ Pterm is terminal emulator from PuTTY package.
 Pterm jest emulatorem terminala z pakietu PuTTY.
 
 %prep
-%setup -q -n %{name}-%{version}-%{snapshot}
+%setup -q -n %{name}-%{version}
 %patch0 -p1
 
 %build
