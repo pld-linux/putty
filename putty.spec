@@ -1,14 +1,14 @@
-%define		snapshot	2004-01-01
+%define		snapshot	2004-02-12
 %define		_snapver	%(echo %{snapshot} | tr -d -)
 Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
-Version:	0.53b
-Release:	0.%{_snapver}.3
+Version:	0.54
+Release:	0.%{_snapver}.1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://www.tartarus.org/~simon/putty-unix/%{name}-%{version}-%{snapshot}.tar.gz
-# Source0-md5:	6083f4677e0c44aa32db598af6aa5520
+# Source0-md5:	6cc21b0ee5909a679433bec8b48fa37d
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
@@ -113,9 +113,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/plink
 %attr(755,root,root) %{_bindir}/pscp
 %attr(755,root,root) %{_bindir}/psftp
+%attr(755,root,root) %{_bindir}/puttygen
 %{_mandir}/man1/plink.1*
 %{_mandir}/man1/pscp.1*
 %{_mandir}/man1/psftp.1*
+%{_mandir}/man1/puttygen.1*
 
 %files X11
 %defattr(644,root,root,755)
