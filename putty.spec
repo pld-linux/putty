@@ -3,12 +3,12 @@
 Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
-Version:	0.54
-Release:	3
+Version:	0.55
+Release:	1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
-# Source0-md5:	ea6de3bc40bb34f4a4a8c861c08e6f31
+# Source0-md5:	b827836bec1109a2c0af9af0f9ae0bae
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
