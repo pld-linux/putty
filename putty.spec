@@ -29,8 +29,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %build
 cd unix
-export CFLAGS="%{rpmcflags} `gtk-config --cflags`"
-%{__make} -f Makefile.gtk
+%{__make} CFLAGS="%{rpmcflags} `gtk-config --cflags` -I. -I.. -I../charset" -f Makefile.gtk
 
 # WARNING!!!
 # this is REALLY temporary, because there are missing these manuals.
