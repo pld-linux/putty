@@ -72,14 +72,14 @@ Pterm is terminal emulator from PuTTY package.
 Pterm jest emulatorem terminala z pakietu PuTTY.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -p1
 
 %build
 cd unix
 %{__make} -f Makefile.gtk \
 	CFLAGS="%{rpmcflags} `gtk-config --cflags` -I. -I.. -I../charset" \
-	CC=%{__cc}
+	CC="%{__cc}"
 
 # WARNING!!!
 # this is REALLY temporary, because there are missing these manuals.
