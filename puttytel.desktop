@@ -16,6 +16,6 @@ Terminal=false
 Icon=puttytel.xpm
 
 Type=Application
-Categories=Application;TODO;Utility;GTK;
+Categories=GTK;Application;Network;
 
 # vi: encoding=utf-8
