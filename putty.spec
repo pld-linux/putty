@@ -57,7 +57,7 @@ install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Network/Communications}
 cd unix
 %{__make} -f Makefile.gtk install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	prefix=/usr \
+	prefix=%{_prefix} \
 	mandir=%{_mandir}
 cd ..
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
