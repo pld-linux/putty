@@ -1,6 +1,3 @@
-# TODO:
-# - make separate packages with X and non-X applications
-
 %define		snapshot	2004-01-01
 %define		_snapver	%(echo %{snapshot} | tr -d -)
 Summary:	Remembers telnet and SSH sessions
@@ -31,6 +28,20 @@ PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
 
 %description -l pl
+PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
+³±cznie z emulatorem terminala xterm, przeniesion± na platformê
+uniksow±.
+
+%package X11
+Summary:	Remembers telnet and SSH sessions - X11 applications
+Summary(pl):	Zapamiêtywanie sesji telnet i SSH - aplikacje X11
+Group:		X11/Appplications/Networking
+
+%description X11
+PuTTY is a free implementation of telnet and SSH for Win32 platforms,
+along with an xterm terminal emulator, ported into Unix platform.
+
+%description X11 -l pl
 PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
@@ -76,9 +87,22 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc LICENCE MODULE README README.txt
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/plink
+%attr(755,root,root) %{_bindir}/pscp
+%attr(755,root,root) %{_bindir}/psftp
+%{_mandir}/man1/plink.1*
+%{_mandir}/man1/pscp.1*
+%{_mandir}/man1/psftp.1*
+
+%files X11
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pterm
+%attr(755,root,root) %{_bindir}/putty
+%attr(755,root,root) %{_bindir}/puttytel
 %{_pixmapsdir}/*.xpm
 %{_applnkdir}/Network/Communications/%{name}.desktop
 %{_applnkdir}/Network/Communications/%{name}tel.desktop
 %{_applnkdir}/Terminals/pterm.desktop
-%{_mandir}/man1/*.1*
+%{_mandir}/man1/pterm.1*
+%{_mandir}/man1/putty.1*
+%{_mandir}/man1/puttytel.1*
