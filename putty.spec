@@ -4,7 +4,7 @@ Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
 Version:	0.55
-Release:	2
+Release:	3
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
@@ -31,7 +31,7 @@ uniksow±.
 %package X11
 Summary:	Remembers telnet and SSH sessions - putty application
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program putty
-Group:		X11/Appplications/Networking
+Group:		X11/Applications/Networking
 
 %description X11
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
@@ -47,7 +47,7 @@ Ten pakiet zawiera tylko program putty dla X11.
 %package puttytel
 Summary:	Remembers telnet and SSH sessions - puttytel application
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program puttytel
-Group:		X11/Appplications/Networking
+Group:		X11/Applications/Networking
 
 %description puttytel
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
