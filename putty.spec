@@ -1,26 +1,19 @@
-# TODO:
-# - make separate packages with X and non-X applications
-
-%define		snapshot	2004-01-01
+%define		snapshot	2004-02-12
 %define		_snapver	%(echo %{snapshot} | tr -d -)
 Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
-Version:	0.53b
-Release:	0.%{_snapver}.2
+Version:	0.56
+Release:	1.1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
-Source0:	http://www.tartarus.org/~simon/putty-unix/%{name}-%{version}-%{snapshot}.tar.gz
-# Source0-md5:	6083f4677e0c44aa32db598af6aa5520
+Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
+# Source0-md5:	6b883cde04771f66e8bb35390935ed31
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
 Source4:	%{name}.xpm
 Source5:	%{name}cfg.xpm
-Source6:	%{name}gen.xpm
-Source7:	scp.xpm
-Source8:	pageant.xpm
-Source9:	pageants.xpm
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.tartarus.org/~simon/putty-unix/
 BuildRequires:	gtk+-devel
@@ -35,8 +28,51 @@ PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
 
+%package X11
+Summary:	Remembers telnet and SSH sessions - putty application
+Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program putty
+Group:		X11/Applications/Networking
+
+%description X11
+PuTTY is a free implementation of telnet and SSH for Win32 platforms,
+along with an xterm terminal emulator, ported into Unix platform.
+This package contains only putty X11 application.
+
+%description X11 -l pl
+PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
+³±cznie z emulatorem terminala xterm, przeniesion± na platformê
+uniksow±.
+Ten pakiet zawiera tylko program putty dla X11.
+
+%package puttytel
+Summary:	Remembers telnet and SSH sessions - puttytel application
+Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program puttytel
+Group:		X11/Applications/Networking
+
+%description puttytel
+PuTTY is a free implementation of telnet and SSH for Win32 platforms,
+along with an xterm terminal emulator, ported into Unix platform.
+This package contains only puttytel X11 application.
+
+%description puttytel -l pl
+PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
+³±cznie z emulatorem terminala xterm, przeniesion± na platformê
+uniksow±.
+Ten pakiet zawiera tylko program puttytel dla X11.
+
+%package pterm
+Summary:	PuTTY terminal
+Summary(pl):	Terminal PuTTY
+Group:		Applications/Terminal
+
+%description pterm
+Pterm is terminal emulator from PuTTY package.
+
+%description pterm -l pl
+Pterm jest emulatorem terminala z pakietu PuTTY.
+
 %prep
-%setup -q -n %{name}-%{version}-%{snapshot}
+%setup -q -n %{name}-%{version}
 %patch0 -p1
 
 %build
@@ -53,22 +89,20 @@ echo ".so putty.1" > psftp.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/{Network/Communications,Terminals}}
+install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
 cd unix
 %{__make} -f Makefile.gtk install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	prefix=%{_prefix} \
 	mandir=%{_mandir}
 cd ..
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Terminals
-install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.xpm
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/pterm.xpm
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}tel.xpm
 install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE7} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE9} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -76,9 +110,32 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc LICENCE MODULE README README.txt
-%attr(755,root,root) %{_bindir}/*
-%{_pixmapsdir}/*.xpm
-%{_applnkdir}/Network/Communications/%{name}.desktop
-%{_applnkdir}/Network/Communications/%{name}tel.desktop
-%{_applnkdir}/Terminals/pterm.desktop
-%{_mandir}/man1/*.1*
+%attr(755,root,root) %{_bindir}/plink
+%attr(755,root,root) %{_bindir}/pscp
+%attr(755,root,root) %{_bindir}/psftp
+%attr(755,root,root) %{_bindir}/puttygen
+%{_mandir}/man1/plink.1*
+%{_mandir}/man1/pscp.1*
+%{_mandir}/man1/psftp.1*
+%{_mandir}/man1/puttygen.1*
+
+%files X11
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/putty
+%{_desktopdir}/%{name}.desktop
+%{_pixmapsdir}/%{name}.xpm
+%{_mandir}/man1/putty.1*
+
+%files puttytel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/%{name}tel
+%{_desktopdir}/%{name}tel.desktop
+%{_pixmapsdir}/%{name}tel.xpm
+%{_mandir}/man1/%{name}tel.1*
+
+%files pterm
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pterm
+%{_desktopdir}/pterm.desktop
+%{_pixmapsdir}/pterm.xpm
+%{_mandir}/man1/pterm.1*

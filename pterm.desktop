@@ -13,9 +13,9 @@ Comment[pl]=Terminal z PuTTY
 TryExec=pterm
 Exec=pterm
 Terminal=false
-Icon=putty.xpm
+Icon=pterm.xpm
 
 Type=Application
-Categories=Application;TODO;Utility;GTK;Terminal;
+Categories=GTK;TerminalEmulator;
 
 # vi: encoding=utf-8

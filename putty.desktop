@@ -16,6 +16,6 @@ Terminal=false
 Icon=putty.xpm
 
 Type=Application
-Categories=Application;TODO;Utility;GTK;
+Categories=GTK;Network;RemoteAccess;
 
 # vi: encoding=utf-8
