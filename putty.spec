@@ -1,7 +1,7 @@
 # TODO:
 # - make separate packages with X and non-X applications
 
-%define		snapshot	2003-08-31
+%define		snapshot	2004-01-01
 %define		_snapver	%(echo %{snapshot} | tr -d -)
 Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
@@ -11,7 +11,7 @@ Release:	0.%{_snapver}.2
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://www.tartarus.org/~simon/putty-unix/%{name}-%{version}-%{snapshot}.tar.gz
-# Source0-md5:	4094754b959e1df5b90b9a14dd2c382a
+# Source0-md5:	6083f4677e0c44aa32db598af6aa5520
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
