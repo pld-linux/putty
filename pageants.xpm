@@ -1,0 +1,29 @@
+/* XPM */
+static char *pageants[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 7 1",
+"  c black",
+". c navy",
+"X c blue",
+"o c #80808000",
+"O c #C0C0C000",
+"+ c gray100",
+"@ c None",
+/* pixels */
+"@@@@@@@ @@@@@@@@",
+"@@@@@@     @@@@@",
+"@@@@@@     @@@@@",
+"@     O+OO @@@@@",
+"@        o @@@@@",
+"@@@          @@@",
+"@@ OOOOOOo     @",
+"@@ O.XXXXXOo   @",
+"@@ O.XXXXXOo @@@",
+"@@ O.XXXXXOo @@@",
+"@@ O.XXXXXOo @@@",
+"@@ oOOOOOOOoo @@",
+"@ OoooooooooO @@",
+"@ OOOOOOOooOo @@",
+"@ oooooooooo @@@",
+"@@          @@@@"
+};
