@@ -2,6 +2,8 @@
 # - prepare desktop
 # - use .ico files that are included into .tar.gz
 # - descriptions...
+# - make separate packages with X and non-X applications
+
 %define		snapshot	2003-08-31
 %define		_snapver	%(echo %{snapshot} | tr -d -)
 Summary:	Remembers telnet and SSH sessions
