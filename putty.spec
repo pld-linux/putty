@@ -1,6 +1,4 @@
 # TODO:
-# - prepare desktop for puttytel, pterm
-# - descriptions...
 # - make separate packages with X and non-X applications
 
 %define		snapshot	2003-08-31
@@ -9,18 +7,20 @@ Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
 Version:	0.53b
-Release:	0.%{_snapver}.1.2
+Release:	0.%{_snapver}.1.3
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://www.tartarus.org/~simon/putty-unix/%{name}-%{version}-%{snapshot}.tar.gz
 # Source0-md5:	4094754b959e1df5b90b9a14dd2c382a
 Source1:	%{name}.desktop
-Source2:	%{name}.xpm
-Source3:	%{name}cfg.xpm
-Source4:	%{name}gen.xpm
-Source5:	scp.xpm
-Source6:	pageant.xpm
-Source7:	pageants.xpm
+Source2:	%{name}tel.desktop
+Source3:	pterm.desktop
+Source4:	%{name}.xpm
+Source5:	%{name}cfg.xpm
+Source6:	%{name}gen.xpm
+Source7:	scp.xpm
+Source8:	pageant.xpm
+Source9:	pageants.xpm
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.tartarus.org/~simon/putty-unix/
 BuildRequires:	gtk+-devel
@@ -53,7 +53,7 @@ echo ".so putty.1" > psftp.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/Network/Communications}
+install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/{Network/Communications,Terminals}}
 cd unix
 %{__make} -f Makefile.gtk install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -61,12 +61,14 @@ cd unix
 	mandir=%{_mandir}
 cd ..
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Terminals
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE7} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE9} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,4 +79,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_pixmapsdir}/*.xpm
 %{_applnkdir}/Network/Communications/%{name}.desktop
+%{_applnkdir}/Network/Communications/%{name}tel.desktop
+%{_applnkdir}/Terminals/pterm.desktop
 %{_mandir}/man1/*.1*
