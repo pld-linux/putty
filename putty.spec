@@ -31,7 +31,7 @@ PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
 
 %description -l pl
-PuTTY jest darmow± implementacj± telnetu SSH dla platform Win32,
+PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
 
