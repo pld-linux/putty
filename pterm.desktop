@@ -16,6 +16,6 @@ Terminal=false
 Icon=pterm.xpm
 
 Type=Application
-Categories=GTK;Application;TerminalEmulator;
+Categories=GTK;TerminalEmulator;
 
 # vi: encoding=utf-8
