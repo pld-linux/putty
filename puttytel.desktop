@@ -13,7 +13,7 @@ Comment[pl]=Klon PuTTY z Win32 - tylko telnet
 TryExec=puttytel
 Exec=puttytel
 Terminal=false
-Icon=putty.xpm
+Icon=puttytel.xpm
 
 Type=Application
 Categories=Application;TODO;Utility;GTK;
