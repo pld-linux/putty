@@ -3,12 +3,12 @@
 Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
-Version:	0.54
-Release:	3
+Version:	0.55
+Release:	1.1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
-# Source0-md5:	ea6de3bc40bb34f4a4a8c861c08e6f31
+# Source0-md5:	b827836bec1109a2c0af9af0f9ae0bae
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
@@ -18,6 +18,9 @@ Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.tartarus.org/~simon/putty-unix/
 BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_prefix		/usr/X11R6
+%define		_desktopdir	%{_applnkdir}/Network/Communications
 
 %description
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
@@ -89,7 +92,7 @@ echo ".so putty.1" > psftp.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
+install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir},%{_applnkdir}/Terminals}
 cd unix
 %{__make} -f Makefile.gtk install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -98,7 +101,7 @@ cd unix
 cd ..
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Terminals
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.xpm
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/pterm.xpm
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}tel.xpm
@@ -136,6 +139,6 @@ rm -rf $RPM_BUILD_ROOT
 %files pterm
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pterm
-%{_desktopdir}/pterm.desktop
+%{_applnkdir}/Terminals/pterm.desktop
 %{_pixmapsdir}/pterm.xpm
 %{_mandir}/man1/pterm.1*
