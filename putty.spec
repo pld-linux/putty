@@ -19,6 +19,9 @@ URL:		http://www.tartarus.org/~simon/putty-unix/
 BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_prefix		/usr/X11R6
+%define		_desktopdir	%{_applnkdir}/Network/Communications
+
 %description
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
@@ -89,7 +92,7 @@ echo ".so putty.1" > psftp.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
+install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir},%{_applnkdir}/Terminals}
 cd unix
 %{__make} -f Makefile.gtk install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -98,7 +101,7 @@ cd unix
 cd ..
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Terminals
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.xpm
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/pterm.xpm
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}tel.xpm
@@ -136,6 +139,6 @@ rm -rf $RPM_BUILD_ROOT
 %files pterm
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pterm
-%{_desktopdir}/pterm.desktop
+%{_applnkdir}/Terminals/pterm.desktop
 %{_pixmapsdir}/pterm.xpm
 %{_mandir}/man1/pterm.1*
