@@ -4,7 +4,7 @@ Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
 Version:	0.54
-Release:	2
+Release:	3
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
@@ -89,16 +89,16 @@ echo ".so putty.1" > psftp.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_applnkdir}/{Network/Communications,Terminals}}
+install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
 cd unix
 %{__make} -f Makefile.gtk install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	prefix=%{_prefix} \
 	mandir=%{_mandir}
 cd ..
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Terminals
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.xpm
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/pterm.xpm
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}tel.xpm
@@ -122,20 +122,20 @@ rm -rf $RPM_BUILD_ROOT
 %files X11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/putty
-%{_applnkdir}/Network/Communications/%{name}.desktop
+%{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.xpm
 %{_mandir}/man1/putty.1*
 
 %files puttytel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{name}tel
-%{_applnkdir}/Network/Communications/%{name}tel.desktop
+%{_desktopdir}/%{name}tel.desktop
 %{_pixmapsdir}/%{name}tel.xpm
 %{_mandir}/man1/%{name}tel.1*
 
 %files pterm
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pterm
-%{_applnkdir}/Terminals/pterm.desktop
+%{_desktopdir}/pterm.desktop
 %{_pixmapsdir}/pterm.xpm
 %{_mandir}/man1/pterm.1*
