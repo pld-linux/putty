@@ -4,7 +4,7 @@ Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
 Version:	0.54
-Release:	1	
+Release:	1.1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
@@ -18,6 +18,8 @@ Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.tartarus.org/~simon/putty-unix/
 BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_prefix		/usr/X11R6
 
 %description
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
