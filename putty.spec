@@ -26,6 +26,8 @@ URL:		http://www.tartarus.org/~simon/putty-unix/
 BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_prefix		/usr/X11R6
+
 %description
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
