@@ -27,8 +27,13 @@ BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-PuTTY is a free implementation of Telnet and SSH for Win32 platforms, along
-with an xterm terminal emulator, ported into Unix platform.
+PuTTY is a free implementation of telnet and SSH for Win32 platforms,
+along with an xterm terminal emulator, ported into Unix platform.
+
+%description -l pl
+PuTTY jest darmow± implementacj± telnetu SSH dla platform Win32,
+³±cznie z emulatorem terminala xterm, przeniesion± na platformê
+uniksow±.
 
 %prep
 %setup -q -n %{name}-%{version}-%{snapshot}
