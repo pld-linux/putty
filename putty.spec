@@ -4,7 +4,7 @@ Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
 Version:	0.53b
-Release:	0.%{_snapver}.2
+Release:	0.%{_snapver}.3
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://www.tartarus.org/~simon/putty-unix/%{name}-%{version}-%{snapshot}.tar.gz
@@ -14,10 +14,6 @@ Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
 Source4:	%{name}.xpm
 Source5:	%{name}cfg.xpm
-Source6:	%{name}gen.xpm
-Source7:	scp.xpm
-Source8:	pageant.xpm
-Source9:	pageants.xpm
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.tartarus.org/~simon/putty-unix/
 BuildRequires:	gtk+-devel
@@ -33,18 +29,47 @@ PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 uniksow±.
 
 %package X11
-Summary:	Remembers telnet and SSH sessions - X11 applications
-Summary(pl):	Zapamiêtywanie sesji telnet i SSH - aplikacje X11
+Summary:	Remembers telnet and SSH sessions - putty application
+Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program putty
 Group:		X11/Appplications/Networking
 
 %description X11
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
+This package contains only putty X11 application.
 
 %description X11 -l pl
 PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
+Ten pakiet zawiera tylko program putty dla X11.
+
+%package puttytel
+Summary:	Remembers telnet and SSH sessions - puttytel application
+Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program puttytel
+Group:		X11/Appplications/Networking
+
+%description puttytel
+PuTTY is a free implementation of telnet and SSH for Win32 platforms,
+along with an xterm terminal emulator, ported into Unix platform.
+This package contains only puttytel X11 application.
+
+%description puttytel -l pl
+PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
+³±cznie z emulatorem terminala xterm, przeniesion± na platformê
+uniksow±.
+Ten pakiet zawiera tylko program puttytel dla X11.
+
+%package pterm
+Summary:	PuTTY terminal
+Summary(pl):	Terminal PuTTY
+Group:		Applications/Terminal
+
+%description pterm
+Pterm is terminal emulator from PuTTY package.
+
+%description pterm -l pl
+Pterm jest emulatorem terminala z pakietu PuTTY.
 
 %prep
 %setup -q -n %{name}-%{version}-%{snapshot}
@@ -74,12 +99,10 @@ cd ..
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Terminals
-install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.xpm
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/pterm.xpm
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}tel.xpm
 install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE6} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE7} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE9} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -96,13 +119,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files X11
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pterm
 %attr(755,root,root) %{_bindir}/putty
-%attr(755,root,root) %{_bindir}/puttytel
-%{_pixmapsdir}/*.xpm
 %{_applnkdir}/Network/Communications/%{name}.desktop
-%{_applnkdir}/Network/Communications/%{name}tel.desktop
-%{_applnkdir}/Terminals/pterm.desktop
-%{_mandir}/man1/pterm.1*
+%{_pixmapsdir}/%{name}.xpm
 %{_mandir}/man1/putty.1*
-%{_mandir}/man1/puttytel.1*
+
+%files puttytel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/%{name}tel
+%{_applnkdir}/Network/Communications/%{name}tel.desktop
+%{_pixmapsdir}/%{name}tel.xpm
+%{_mandir}/man1/%{name}tel.1*
+
+%files pterm
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pterm
+%{_applnkdir}/Terminals/pterm.desktop
+%{_pixmapsdir}/pterm.xpm
+%{_mandir}/man1/pterm.1*
