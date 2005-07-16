@@ -1,3 +1,7 @@
+# TODO
+# - fix stupid package naming. if want putty, i install putty and i get useless
+#   programs and no putty binary???  move putty to putty-common, and make
+#   putty-X11 the main package
 %define		snapshot	2004-02-12
 %define		_snapver	%(echo %{snapshot} | tr -d -)
 Summary:	Remembers telnet and SSH sessions
