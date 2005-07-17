@@ -1,5 +1,3 @@
-# TODO
-# - correct pl summary/descriptions
 Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
@@ -31,7 +29,7 @@ uniksow±.
 
 %package progs
 Summary:	PuTTY additional programs
-Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program putty
+Summary(pl):	Dodatkowe programy dla PuTTY
 Group:		X11/Applications/Networking
 
 %description progs
@@ -45,11 +43,11 @@ PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
 
-Ten pakiet zawiera additional program for PuTTY.
+Ten pakiet zawiera dodatkowe programy dla PuTTY.
 
 %package puttytel
 Summary:	puttytel application
-Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program puttytel
+Summary(pl):	Aplikacja puttytel
 Group:		X11/Applications/Networking
 
 %description puttytel
