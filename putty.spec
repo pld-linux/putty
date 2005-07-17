@@ -1,17 +1,13 @@
 # TODO
-# - fix stupid package naming. if want putty, i install putty and i get useless
-#   programs and no putty binary???  move putty to putty-common, and make
-#   putty-X11 the main package
-%define		snapshot	2004-02-12
-%define		_snapver	%(echo %{snapshot} | tr -d -)
+# - correct pl summary/descriptions
 Summary:	Remembers telnet and SSH sessions
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH
 Name:		putty
 Version:	0.58
-Release:	1
+Release:	2
 License:	MIT-licensed
 Group:		X11/Applications/Networking
-Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz	
+Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
 # Source0-md5:	ffb78a7db7e4802896189b2112714a9f
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
@@ -20,6 +16,7 @@ Source4:	%{name}.xpm
 Source5:	%{name}cfg.xpm
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.tartarus.org/~simon/putty-unix/
+Obsoletes:	%{name}-X11
 BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -32,37 +29,41 @@ PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
 
-%package X11
-Summary:	Remembers telnet and SSH sessions - putty application
+%package progs
+Summary:	PuTTY additional programs
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program putty
 Group:		X11/Applications/Networking
 
-%description X11
+%description progs
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
-This package contains only putty X11 application.
 
-%description X11 -l pl
+This package contains additional programs for PuTTY.
+
+%description progs -l pl
 PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
-Ten pakiet zawiera tylko program putty dla X11.
+
+Ten pakiet zawiera additional program for PuTTY.
 
 %package puttytel
-Summary:	Remembers telnet and SSH sessions - puttytel application
+Summary:	puttytel application
 Summary(pl):	Zapamiêtywanie sesji telnet i SSH - program puttytel
 Group:		X11/Applications/Networking
 
 %description puttytel
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
-This package contains only puttytel X11 application.
+
+This package contains puttytel application.
 
 %description puttytel -l pl
 PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
 ³±cznie z emulatorem terminala xterm, przeniesion± na platformê
 uniksow±.
-Ten pakiet zawiera tylko program puttytel dla X11.
+
+Ten pakiet zawiera program puttytel.
 
 %package pterm
 Summary:	PuTTY terminal
@@ -114,6 +115,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc LICENCE README README.txt
+%attr(755,root,root) %{_bindir}/putty
+%{_desktopdir}/%{name}.desktop
+%{_pixmapsdir}/%{name}.xpm
+%{_mandir}/man1/putty.1*
+
+%files progs
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/plink
 %attr(755,root,root) %{_bindir}/pscp
 %attr(755,root,root) %{_bindir}/psftp
@@ -122,13 +130,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/pscp.1*
 %{_mandir}/man1/psftp.1*
 %{_mandir}/man1/puttygen.1*
-
-%files X11
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/putty
-%{_desktopdir}/%{name}.desktop
-%{_pixmapsdir}/%{name}.xpm
-%{_mandir}/man1/putty.1*
 
 %files puttytel
 %defattr(644,root,root,755)
