@@ -15,7 +15,7 @@ Source3:	pterm.desktop
 Source4:	%{name}.xpm
 Source5:	%{name}cfg.xpm
 Patch0:		%{name}-DESTDIR.patch
-URL:		http://www.tartarus.org/~simon/putty-unix/
+URL:		http://www.chiark.greenend.org.uk/~sgtatham/putty/
 Obsoletes:	%{name}-X11
 BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
