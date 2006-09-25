@@ -84,12 +84,6 @@ cd unix
 	CFLAGS="%{rpmcflags} `gtk-config --cflags` -I. -I.. -I../charset" \
 	CC="%{__cc}"
 
-# WARNING!!!
-# this is REALLY temporary, because there are missing these manuals.
-# Check if these are present in new version.
-echo ".so putty.1" > pscp.1
-echo ".so putty.1" > psftp.1
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
