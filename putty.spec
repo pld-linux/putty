@@ -1,5 +1,5 @@
 Summary:	Remembers telnet and SSH sessions
-Summary(pl):	Zapamiêtywanie sesji telnet i SSH
+Summary(pl.UTF-8):   ZapamiÄ™tywanie sesji telnet i SSH
 Name:		putty
 Version:	0.59
 Release:	1
@@ -22,14 +22,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 PuTTY is a free implementation of telnet and SSH for Win32 platforms,
 along with an xterm terminal emulator, ported into Unix platform.
 
-%description -l pl
-PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
-³±cznie z emulatorem terminala xterm, przeniesion± na platformê
-uniksow±.
+%description -l pl.UTF-8
+PuTTY jest darmowÄ… implementacjÄ… telnetu i SSH dla platform Win32,
+Å‚Ä…cznie z emulatorem terminala xterm, przeniesionÄ… na platformÄ™
+uniksowÄ….
 
 %package progs
 Summary:	PuTTY additional programs
-Summary(pl):	Dodatkowe programy dla PuTTY
+Summary(pl.UTF-8):   Dodatkowe programy dla PuTTY
 Group:		X11/Applications/Networking
 
 %description progs
@@ -38,16 +38,16 @@ along with an xterm terminal emulator, ported into Unix platform.
 
 This package contains additional programs for PuTTY.
 
-%description progs -l pl
-PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
-³±cznie z emulatorem terminala xterm, przeniesion± na platformê
-uniksow±.
+%description progs -l pl.UTF-8
+PuTTY jest darmowÄ… implementacjÄ… telnetu i SSH dla platform Win32,
+Å‚Ä…cznie z emulatorem terminala xterm, przeniesionÄ… na platformÄ™
+uniksowÄ….
 
 Ten pakiet zawiera dodatkowe programy dla PuTTY.
 
 %package puttytel
 Summary:	puttytel application
-Summary(pl):	Aplikacja puttytel
+Summary(pl.UTF-8):   Aplikacja puttytel
 Group:		X11/Applications/Networking
 
 %description puttytel
@@ -56,22 +56,22 @@ along with an xterm terminal emulator, ported into Unix platform.
 
 This package contains puttytel application.
 
-%description puttytel -l pl
-PuTTY jest darmow± implementacj± telnetu i SSH dla platform Win32,
-³±cznie z emulatorem terminala xterm, przeniesion± na platformê
-uniksow±.
+%description puttytel -l pl.UTF-8
+PuTTY jest darmowÄ… implementacjÄ… telnetu i SSH dla platform Win32,
+Å‚Ä…cznie z emulatorem terminala xterm, przeniesionÄ… na platformÄ™
+uniksowÄ….
 
 Ten pakiet zawiera program puttytel.
 
 %package pterm
 Summary:	PuTTY terminal
-Summary(pl):	Terminal PuTTY
+Summary(pl.UTF-8):   Terminal PuTTY
 Group:		Applications/Terminal
 
 %description pterm
 Pterm is terminal emulator from PuTTY package.
 
-%description pterm -l pl
+%description pterm -l pl.UTF-8
 Pterm jest emulatorem terminala z pakietu PuTTY.
 
 %prep
