@@ -1,5 +1,5 @@
 Summary:	Remembers telnet and SSH sessions
-Summary(pl.UTF-8):   Zapamiętywanie sesji telnet i SSH
+Summary(pl.UTF-8):	Zapamiętywanie sesji telnet i SSH
 Name:		putty
 Version:	0.59
 Release:	1
@@ -29,7 +29,7 @@ uniksową.
 
 %package progs
 Summary:	PuTTY additional programs
-Summary(pl.UTF-8):   Dodatkowe programy dla PuTTY
+Summary(pl.UTF-8):	Dodatkowe programy dla PuTTY
 Group:		X11/Applications/Networking
 
 %description progs
@@ -47,7 +47,7 @@ Ten pakiet zawiera dodatkowe programy dla PuTTY.
 
 %package puttytel
 Summary:	puttytel application
-Summary(pl.UTF-8):   Aplikacja puttytel
+Summary(pl.UTF-8):	Aplikacja puttytel
 Group:		X11/Applications/Networking
 
 %description puttytel
@@ -65,7 +65,7 @@ Ten pakiet zawiera program puttytel.
 
 %package pterm
 Summary:	PuTTY terminal
-Summary(pl.UTF-8):   Terminal PuTTY
+Summary(pl.UTF-8):	Terminal PuTTY
 Group:		Applications/Terminal
 
 %description pterm
