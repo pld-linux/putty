@@ -1,21 +1,14 @@
 [Desktop Entry]
-Encoding=UTF-8
 Version=1.0
-
 Name=puttytel
-
 GenericName=PuTTYtel
 GenericName[pl]=PuTTYtel
-
 Comment=Win32 PuTTYs clone - telnet only
 Comment[pl]=Klon PuTTY z Win32 - tylko telnet
-
 TryExec=puttytel
 Exec=puttytel
 Terminal=false
-Icon=puttytel.xpm
-
+Icon=puttytel
 Type=Application
 Categories=GTK;Network;RemoteAccess;
-
 # vi: encoding=utf-8

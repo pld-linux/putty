@@ -1,21 +1,14 @@
 [Desktop Entry]
-Encoding=UTF-8
 Version=1.0
-
 Name=pterm
-
 GenericName=PuTTY terminal
 GenericName[pl]=Terminal PuTTY
-
 Comment=Terminal from PuTTY
 Comment[pl]=Terminal z PuTTY
-
 TryExec=pterm
 Exec=pterm
 Terminal=false
-Icon=pterm.xpm
-
+Icon=pterm
 Type=Application
 Categories=GTK;TerminalEmulator;
-
 # vi: encoding=utf-8
