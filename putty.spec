@@ -1,21 +1,26 @@
 Summary:	Remembers telnet and SSH sessions
 Summary(pl.UTF-8):	Zapamiętywanie sesji telnet i SSH
 Name:		putty
-Version:	0.60
+Version:	0.62
 Release:	1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
-# Source0-md5:	07e65fd98b16d115ae38a180bfb242e2
-Source1:	%{name}.desktop
-Source2:	%{name}tel.desktop
+# Source0-md5:	1344b606a680a9036df0fc3a05e62e71
+Source1:	putty.desktop
+Source2:	puttytel.desktop
 Source3:	pterm.desktop
-Source4:	%{name}.xpm
-Source5:	%{name}cfg.xpm
-Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.chiark.greenend.org.uk/~sgtatham/putty/
-Obsoletes:	%{name}-X11
-BuildRequires:	gtk+-devel
+Obsoletes:	putty-X11
+Obsoletes:	putty-pterm
+Obsoletes:	putty-puttytel
+BuildRequires:	gtk+2-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	python
+BuildRequires:	ImageMagick
+BuildRequires:	ImageMagick-coder-png
+Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	hicolor-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,43 +50,14 @@ uniksową.
 
 Ten pakiet zawiera dodatkowe programy dla PuTTY.
 
-%package puttytel
-Summary:	puttytel application
-Summary(pl.UTF-8):	Aplikacja puttytel
-Group:		X11/Applications/Networking
-
-%description puttytel
-PuTTY is a free implementation of telnet and SSH for Win32 platforms,
-along with an xterm terminal emulator, ported into Unix platform.
-
-This package contains puttytel application.
-
-%description puttytel -l pl.UTF-8
-PuTTY jest darmową implementacją telnetu i SSH dla platform Win32,
-łącznie z emulatorem terminala xterm, przeniesioną na platformę
-uniksową.
-
-Ten pakiet zawiera program puttytel.
-
-%package pterm
-Summary:	PuTTY terminal
-Summary(pl.UTF-8):	Terminal PuTTY
-Group:		Applications/Terminal
-
-%description pterm
-Pterm is terminal emulator from PuTTY package.
-
-%description pterm -l pl.UTF-8
-Pterm jest emulatorem terminala z pakietu PuTTY.
-
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 cd unix
 %{__make} -f Makefile.gtk \
-	CFLAGS="%{rpmcflags} `gtk-config --cflags` -I. -I.. -I../charset" \
+	CFLAGS="%{rpmcflags} $(pkg-config gtk+-2.0 x11 --cflags) -I. -I.. -I../charset -D _FILE_OFFSET_BITS=64" \
+	LDFLAGS="%{rpmldflags}" \
 	CC="%{__cc}"
 
 %install
@@ -93,24 +69,41 @@ cd unix
 	prefix=%{_prefix} \
 	mandir=%{_mandir}
 cd ..
+cd icons
+for size  in 16 32 48 64 96 128 ; do
+	dir=$RPM_BUILD_ROOT%{_iconsdir}/hicolor/${size}x${size}/apps
+	install -d $dir
+	./mkicon.py -T putty_icon ${size} $dir/putty.png
+	./mkicon.py -T pterm_icon ${size} $dir/pterm.png
+done
+cd ..
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.xpm
-install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/pterm.xpm
-install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}tel.xpm
-install %{SOURCE5} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+%update_icon_cache hicolor
+
+%postun
+%update_icon_cache hicolor
+
 %files
 %defattr(644,root,root,755)
 %doc LICENCE README
+%attr(755,root,root) %{_bindir}/pterm
 %attr(755,root,root) %{_bindir}/putty
-%{_desktopdir}/%{name}.desktop
-%{_pixmapsdir}/%{name}.xpm
+%attr(755,root,root) %{_bindir}/puttytel
+%{_desktopdir}/pterm.desktop
+%{_desktopdir}/putty.desktop
+%{_desktopdir}/puttytel.desktop
+%{_iconsdir}/hicolor/*/apps/pterm.png
+%{_iconsdir}/hicolor/*/apps/putty.png
+%{_mandir}/man1/pterm.1*
 %{_mandir}/man1/putty.1*
+%{_mandir}/man1/puttytel.1*
 
 %files progs
 %defattr(644,root,root,755)
@@ -122,17 +115,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/pscp.1*
 %{_mandir}/man1/psftp.1*
 %{_mandir}/man1/puttygen.1*
-
-%files puttytel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/%{name}tel
-%{_desktopdir}/%{name}tel.desktop
-%{_pixmapsdir}/%{name}tel.xpm
-%{_mandir}/man1/%{name}tel.1*
-
-%files pterm
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pterm
-%{_desktopdir}/pterm.desktop
-%{_pixmapsdir}/pterm.xpm
-%{_mandir}/man1/pterm.1*
