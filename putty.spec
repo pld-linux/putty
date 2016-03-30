@@ -54,29 +54,31 @@ Ten pakiet zawiera dodatkowe programy dla PuTTY.
 %setup -q
 
 %build
-cd unix
-%{__make} -f Makefile.gtk \
+./mkfiles.pl
+%{__make} -C unix -f Makefile.gtk \
+	VER=-DSNAPSHOT=%{version} \
 	CFLAGS="%{rpmcflags} $(pkg-config gtk+-2.0 x11 --cflags) -I. -I.. -I../charset -D _FILE_OFFSET_BITS=64" \
 	LDFLAGS="%{rpmldflags}" \
 	CC="%{__cc}"
 
-%install
-rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
-cd unix
-%{__make} -f Makefile.gtk install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	prefix=%{_prefix} \
-	mandir=%{_mandir}
-cd ..
 cd icons
 for size  in 16 32 48 64 96 128 ; do
-	dir=$RPM_BUILD_ROOT%{_iconsdir}/hicolor/${size}x${size}/apps
+	dir=hicolor/${size}x${size}/apps
 	install -d $dir
 	./mkicon.py -T putty_icon ${size} $dir/putty.png
 	./mkicon.py -T pterm_icon ${size} $dir/pterm.png
 done
-cd ..
+
+%install
+rm -rf $RPM_BUILD_ROOT
+%{__make} -C unix -f Makefile.gtk install \
+	INSTALL="install -p" \
+	prefix=%{_prefix} \
+	mandir=%{_mandir} \
+	DESTDIR=$RPM_BUILD_ROOT
+
+install -d $RPM_BUILD_ROOT{%{_iconsdir},%{_desktopdir}}
+cp -a icons/hicolor $RPM_BUILD_ROOT%{_iconsdir}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
@@ -96,14 +98,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pterm
 %attr(755,root,root) %{_bindir}/putty
 %attr(755,root,root) %{_bindir}/puttytel
+%{_mandir}/man1/pterm.1*
+%{_mandir}/man1/putty.1*
+%{_mandir}/man1/puttytel.1*
 %{_desktopdir}/pterm.desktop
 %{_desktopdir}/putty.desktop
 %{_desktopdir}/puttytel.desktop
 %{_iconsdir}/hicolor/*/apps/pterm.png
 %{_iconsdir}/hicolor/*/apps/putty.png
-%{_mandir}/man1/pterm.1*
-%{_mandir}/man1/putty.1*
-%{_mandir}/man1/puttytel.1*
 
 %files progs
 %defattr(644,root,root,755)
