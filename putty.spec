@@ -1,24 +1,24 @@
 Summary:	Remembers telnet and SSH sessions
 Summary(pl.UTF-8):	Zapamiętywanie sesji telnet i SSH
 Name:		putty
-Version:	0.62
+Version:	0.67
 Release:	1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
-# Source0-md5:	1344b606a680a9036df0fc3a05e62e71
-Source1:	putty.desktop
-Source2:	puttytel.desktop
+# Source0-md5:	8d5d450e8f9a011e2e411e3f30827e9b
+Source1:	%{name}.desktop
+Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
 URL:		http://www.chiark.greenend.org.uk/~sgtatham/putty/
+BuildRequires:	ImageMagick
+BuildRequires:	ImageMagick-coder-png
+BuildRequires:	gtk+2-devel
+BuildRequires:	python
+BuildRequires:	xorg-lib-libX11-devel
 Obsoletes:	putty-X11
 Obsoletes:	putty-pterm
 Obsoletes:	putty-puttytel
-BuildRequires:	gtk+2-devel
-BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	python
-BuildRequires:	ImageMagick
-BuildRequires:	ImageMagick-coder-png
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -77,9 +77,9 @@ for size  in 16 32 48 64 96 128 ; do
 	./mkicon.py -T pterm_icon ${size} $dir/pterm.png
 done
 cd ..
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
