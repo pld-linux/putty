@@ -13,7 +13,8 @@ Source3:	pterm.desktop
 URL:		http://www.chiark.greenend.org.uk/~sgtatham/putty/
 BuildRequires:	ImageMagick
 BuildRequires:	ImageMagick-coder-png
-BuildRequires:	gtk+2-devel
+BuildRequires:	gtk+2-devel >= 1:2.0
+BuildRequires:	pkgconfig
 BuildRequires:	python
 BuildRequires:	xorg-lib-libX11-devel
 Obsoletes:	putty-X11
@@ -57,7 +58,7 @@ Ten pakiet zawiera dodatkowe programy dla PuTTY.
 ./mkfiles.pl
 %{__make} -C unix -f Makefile.gtk \
 	VER=-DSNAPSHOT=%{version} \
-	CFLAGS="%{rpmcflags} $(pkg-config gtk+-2.0 x11 --cflags) -I. -I.. -I../charset -D _FILE_OFFSET_BITS=64" \
+	CFLAGS="%{rpmcflags} $(pkg-config gtk+-2.0 x11 --cflags) -I. -I.. -I../charset -D_FILE_OFFSET_BITS=64" \
 	LDFLAGS="%{rpmldflags}" \
 	CC="%{__cc}"
 
