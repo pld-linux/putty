@@ -1,12 +1,12 @@
 Summary:	Remembers telnet and SSH sessions
 Summary(pl.UTF-8):	Zapamiętywanie sesji telnet i SSH
 Name:		putty
-Version:	0.67
+Version:	0.73
 Release:	1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
-# Source0-md5:	8d5d450e8f9a011e2e411e3f30827e9b
+# Source0-md5:	d4a1797763e11e6a77115d0d0368b566
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
@@ -55,12 +55,11 @@ Ten pakiet zawiera dodatkowe programy dla PuTTY.
 %setup -q
 
 %build
-./mkfiles.pl
-%{__make} -C unix -f Makefile.gtk \
-	VER=-DSNAPSHOT=%{version} \
-	CFLAGS="%{rpmcflags} $(pkg-config gtk+-2.0 x11 --cflags) -I. -I.. -I../charset -D_FILE_OFFSET_BITS=64" \
-	LDFLAGS="%{rpmldflags}" \
-	CC="%{__cc}"
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%configure
+%{__make}
 
 cd icons
 for size  in 16 32 48 64 96 128 ; do
@@ -72,10 +71,7 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} -C unix -f Makefile.gtk install \
-	INSTALL="install -p" \
-	prefix=%{_prefix} \
-	mandir=%{_mandir} \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_iconsdir},%{_desktopdir}}
@@ -110,10 +106,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pageant
 %attr(755,root,root) %{_bindir}/plink
 %attr(755,root,root) %{_bindir}/pscp
 %attr(755,root,root) %{_bindir}/psftp
 %attr(755,root,root) %{_bindir}/puttygen
+%{_mandir}/man1/pageant.1*
 %{_mandir}/man1/plink.1*
 %{_mandir}/man1/pscp.1*
 %{_mandir}/man1/psftp.1*
