@@ -1,0 +1,11 @@
+--- putty-0.77.orig/defs.h	2022-05-24 18:56:25.000000000 +0200
++++ putty-0.77/defs.h	2022-07-15 14:06:03.028384200 +0200
+@@ -19,7 +19,7 @@
+  * should arrange that we don't ever accidentally compile assertions
+  * out.
+  */
+-#error Do not compile this code base with NDEBUG defined!
++//#error Do not compile this code base with NDEBUG defined!
+ #endif
+ 
+ #if HAVE_CMAKE_H

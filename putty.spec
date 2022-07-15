@@ -1,15 +1,17 @@
 Summary:	Remembers telnet and SSH sessions
 Summary(pl.UTF-8):	Zapamiętywanie sesji telnet i SSH
 Name:		putty
-Version:	0.73
+Version:	0.77
 Release:	1
 License:	MIT-licensed
 Group:		X11/Applications/Networking
 Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
-# Source0-md5:	d4a1797763e11e6a77115d0d0368b566
+# Source0-md5:	a6ffe10f1a3f63e7bfff0b212244fdf7
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
+# DIRTY HACK!
+Patch0:		%{name}-ndebug-hack.patch
 URL:		http://www.chiark.greenend.org.uk/~sgtatham/putty/
 BuildRequires:	ImageMagick
 BuildRequires:	ImageMagick-coder-png
@@ -53,15 +55,15 @@ Ten pakiet zawiera dodatkowe programy dla PuTTY.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure
+install -d build
+cd build
+%cmake ..
 %{__make}
 
-cd icons
+cd ../icons
 for size  in 16 32 48 64 96 128 ; do
 	dir=hicolor/${size}x${size}/apps
 	install -d $dir
@@ -71,8 +73,11 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+cp -p build/puttytel $RPM_BUILD_ROOT%{_bindir}
+cp -p doc/puttytel.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install -d $RPM_BUILD_ROOT{%{_iconsdir},%{_desktopdir}}
 cp -a icons/hicolor $RPM_BUILD_ROOT%{_iconsdir}
@@ -110,9 +115,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/plink
 %attr(755,root,root) %{_bindir}/pscp
 %attr(755,root,root) %{_bindir}/psftp
+%attr(755,root,root) %{_bindir}/psusan
 %attr(755,root,root) %{_bindir}/puttygen
 %{_mandir}/man1/pageant.1*
 %{_mandir}/man1/plink.1*
 %{_mandir}/man1/pscp.1*
 %{_mandir}/man1/psftp.1*
+%{_mandir}/man1/psusan.1*
 %{_mandir}/man1/puttygen.1*
