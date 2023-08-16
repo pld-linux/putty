@@ -3,27 +3,27 @@ Summary(pl.UTF-8):	Zapamiętywanie sesji telnet i SSH
 Name:		putty
 Version:	0.78
 Release:	1
-License:	MIT-licensed
+License:	MIT
 Group:		X11/Applications/Networking
-Source0:	http://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
+Source0:	https://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
 # Source0-md5:	6de073540eaf1ee182f9a4da61982211
 Source1:	%{name}.desktop
 Source2:	%{name}tel.desktop
 Source3:	pterm.desktop
-# DIRTY HACK!
-Patch0:		%{name}-ndebug-hack.patch
-URL:		http://www.chiark.greenend.org.uk/~sgtatham/putty/
+URL:		https://www.chiark.greenend.org.uk/~sgtatham/putty/
 BuildRequires:	ImageMagick
 BuildRequires:	ImageMagick-coder-png
-BuildRequires:	gtk+2-devel >= 1:2.0
+BuildRequires:	cmake >= 3.7
+BuildRequires:	gtk+3-devel >= 3.0
 BuildRequires:	pkgconfig
-BuildRequires:	python
+BuildRequires:	python3 >= 1:3.0
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	xorg-lib-libX11-devel
-Obsoletes:	putty-X11
-Obsoletes:	putty-pterm
-Obsoletes:	putty-puttytel
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
+Obsoletes:	putty-X11 < 0.58-2
+Obsoletes:	putty-pterm < 0.62
+Obsoletes:	putty-puttytel < 0.62
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,11 +55,13 @@ Ten pakiet zawiera dodatkowe programy dla PuTTY.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 install -d build
 cd build
+# override with no -DNDEBUG (don't disable asserts in putty, some of them can be security related)
+# (see defs.h:14-23)
+CFLAGS="%{rpmcflags}"
 %cmake ..
 %{__make}
 
@@ -73,6 +75,7 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
