@@ -2,7 +2,7 @@ Summary:	Remembers telnet and SSH sessions
 Summary(pl.UTF-8):	Zapamiętywanie sesji telnet i SSH
 Name:		putty
 Version:	0.82
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Applications/Networking
 Source0:	https://the.earth.li/~sgtatham/putty/latest/%{name}-%{version}.tar.gz
